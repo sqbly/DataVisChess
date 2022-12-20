@@ -4,21 +4,38 @@
         
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+        <link rel="stylesheet" href="assets/css/style.css" />
+        <link rel="stylesheet" href="node_modules/@chrisoakman/chessboardjs/dist/chessboard-1.0.0.min.css" />
         <title>Chess VIsualizer</title>
     </head>
     <body>
         <div>Hello World! Soon you will see stuff here. </div>
         <div id="playerOverview"></div>
-        <div id='myDiv'>
-            <!-- Plotly chart will be drawn inside this DIV -->
+
+       
+        <!-- <div id="board1" style="width: 400px"></div> -->
+
+        <div class="demo-wrapper">
+            <div class="heatmap" id="board1" style="width: 400px"></div> 
         </div>
-        <div id="sf-plot"></div>
+
+        
+        
+        <!-- </div>
+        <div id='myDiv'>
+        </div>
+        <div id="sf-plot"></div> -->
     </body>
     <script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script>
     <script src="https://d3js.org/d3.v4.js"></script>
-    <script src='/players.js'></script>
-    <script src='/script.js'></script>
+    <script src='/assets/js/players.js'></script>
+    <script src="/node_modules/jquery/dist/jquery.js"></script>
+    <!-- <script src='/assets/js/script.js'></script> -->
+    <script src='/node_modules/@chrisoakman/chessboardjs/dist/chessboard-1.0.0.js'> </script>
+    <!-- <script src='/node_modules/@chrisoakman/chessboardjs/dist/chessboard-1.0.0.min.js'> </script> -->
+
+    <script src='/node_modules/heatmap.js/build/heatmap.min.js'></script>
+    <script src='/assets/js/heatmap.js'></script>
 
 </html>
 
