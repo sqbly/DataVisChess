@@ -30,14 +30,17 @@ addLink(0,7,0);
 addLink(3,5,3);
 addLink(1,6,6);
 addLink(2,4,2);
+addLink(0,3,3);
 
 //TODO:
-// 1. add color coordination for white/black
+// 1. add color coordination for white/black / gradient on arc
 // 2. show elo and country, maybe in a generator with picture
 // 3. make it easier to hover links
 // 4. add a legend maybe
 // 5. make a data generator for the link/player data
-//
+// 6. allow multiple games between two players
+// 7. make hitbox bigger of lines
+// 8. 
 class PlayerOverview{
     constructor(players,links){
         this.players=players;
