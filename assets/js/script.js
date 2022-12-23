@@ -1,15 +1,15 @@
-var x = [];
-var y = [];
-for (var i = 0; i < 500; i ++) {
-	x[i] = Math.random();
-	y[i] = Math.random() + 1;
+function showerToggler() {
+  var x = document.getElementById("heatmap_board");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+  var y = document.getElementById("situation_board");
+  if (y.style.display === "none") {
+    y.style.display = "block";
+  } else {
+    y.style.display = "none";
+  }
 }
 
-var data = [
-  {
-    x: x,
-    y: y,
-    type: 'histogram2d'
-  }
-];
-Plotly.newPlot('myDiv', data);

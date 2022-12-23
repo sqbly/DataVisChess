@@ -47,3 +47,4 @@ var data = {
 // for data initialization
 heatmapInstance.setData(data);
 
+showerToggler()
