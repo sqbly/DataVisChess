@@ -1,8 +1,8 @@
 var config = {
-    position: 'start'
+    position: 'empty'
 }
 
-var board1 = Chessboard('board1', config)
+var board1 = Chessboard('board_heatmap', config)
 
 var heatmapConfig = {
     container: document.querySelector('.heatmap'),
@@ -13,8 +13,8 @@ var heatmapConfig = {
     gradient: {
         // enter n keys between 0 and 1 here
         // for gradient color customization
-        '0': '#00000000',
-        '1': 'white'
+        '0': 'black',
+        '1': 'black'
     }
 };
 
