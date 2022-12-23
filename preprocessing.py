@@ -7,11 +7,18 @@ import json
 #split pgn into games,
 #get all players from the games
 #get all links from the games
-
+test_Fen="r2rn3/5p2/2pNk1p1/1p2P1Pp/p1p2P2/P4K1P/1PPR4/3R4 b - - 5 28"
 
 #ask sqbl what he needs
 
-#sf=Stockfish(path='/home/felix/Desktop/uni/data_vis/data_vis/stockfish_15.1_linux_x64_avx2/stockfish-ubuntu-20.04-x86-64-avx2')
+sf=Stockfish(path='./stockfish/stockfish-ubuntu-20.04-x86-64-avx2',parameters={"Threads":4,"Hash":2048})
+
+
+sf.set_fen_position(test_Fen)
+print(sf.get_evaluation())
+#cp = centipawns
+#mate = mate in x moves
+#- means black is better
 
 def fileProcessing():
     pgn_file=open('multi-games-pgn.pgn','r',encoding='utf-8').read()
@@ -23,7 +30,6 @@ def turnToFen(game):
     i=1
     game_fens={}
     for move in game.mainline_moves():
-        print(move)
         board.push(move)
         fen=board.fen()
         if i%1==0.5:
@@ -33,15 +39,68 @@ def turnToFen(game):
         i+=0.5 
     return game_fens
 
-def stockfishGame(game,name):
-    pass
+def stockfishGame(game):
+    #maybe plausible with the fen dict
+    evals=[]
+    for i in game.keys():
+        sf.set_fen_position(game[i])
+        evals.append(sf.get_evaluation())
+    return evals
     #need to get player names and round number
     #for unqiue file name
-    
 
-def gameProcessing(games):
+def addPlayer(player_name,elo,players_dict):
+    players_dict[player_name]={}
+    players_dict[player_name]["id"]=len(players_dict.keys())
+    players_dict[player_name]["name"]=' '.join([i.strip() for i in player_name.split(',')][::-1])
+    players_dict[player_name]["elo"]=elo
+    return players_dict
+
+def addLink(game_name,game,player_dict,links_dict):
+    white=game.headers['White']
+    black=game.headers['Black']
+    links_dict[game_name]={}
+    links_dict[game_name]["white"]=player_dict[white]["id"]
+    links_dict[game_name]["black"]=player_dict[black]["id"]
+    links_dict[game_name]["round"]=game.headers['Round']
+    links_dict[game_name]["id"]=len(links_dict.keys())
+
+    result=game.headers['Result']
+    if result=="1-0":
+        links_dict[game_name]["winner"]=player_dict[white]["id"]
+    elif result=="0-1":
+        links_dict[game_name]["winner"]=player_dict[black]["id"]
+    else:
+        links_dict[game_name]["winner"]=-1
+    return links_dict
+
+def addGame(game_name,game, games_dict):
+    #add player name to dict, add unique id, 
+    #add name with _ used in game namen
+    #add links to 
+    links=games_dict["games"]
+    players=games_dict["players"]
+    white=game.headers['White']
+    black=game.headers['Black']
+    if not white in players.keys():
+        players=addPlayer(white,game.headers["WhiteElo"],players)
+    if not black in players.keys():
+        players=addPlayer(black,game.headers["BlackElo"],players)
+    links=addLink(game_name,game,players,links)
+    return {"players":players,"games":links}
+
+def nameGen(white,black,round):
+    temp=white+'_'+black+'_'+round
+    temp=temp.replace(' ','_')
+    temp=temp.replace(',','')
+    return temp
+
+def gamesProcessing(games):
     FENS={}
     EVALS={}
+    #players= {id,name with _, name, country, elo}
+    #games= {white, black, winner, round, maybe id}
+    TOURNAMENT={"players":{},"games":{}}
     for game in games:
         game=io.StringIO(game)
         game=pgn.read_game(game)
@@ -50,20 +109,16 @@ def gameProcessing(games):
         round=game.headers['Round']
         name=nameGen(white,black,round)
         FENS[name]=turnToFen(game)
-        #stockfishGame(game,name)
+        EVALS[name]=stockfishGame(FENS[name])
+        TOURNAMENT=addGame(name,game,TOURNAMENT)
+        print(f"game {name} done")
     with open("fens.json", "w") as outfile:
         json.dump(FENS, outfile)
-
-
-
-def nameGen(white,black,round):
-    white=white.replace(' ','_')
-    black=black.replace(' ','_')
-    white=white.replace(',','')
-    black=black.replace(',','')
-    temp=white+'_'+black+'_'+round
-    return temp
+    with open("evals.json", "w") as outfile:
+        json.dump(EVALS, outfile)
+    with open("tournament.json", "w") as outfile:
+        json.dump(TOURNAMENT, outfile)
 
 if __name__ == "__main__":
     g=fileProcessing()
-    gameProcessing(g)
+    gamesProcessing(g)
