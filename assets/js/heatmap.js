@@ -4,12 +4,22 @@ var config = {
 
 var board1 = Chessboard('board1', config)
 
+var heatmapConfig = {
+    container: document.querySelector('.heatmap'),
+    radius: 20,
+    maxOpacity: 1,
+    minOpacity: 0,
+    blur: 0,
+    gradient: {
+        // enter n keys between 0 and 1 here
+        // for gradient color customization
+        '0': '#00000000',
+        '1': 'white'
+    }
+};
 
 // minimal heatmap instance configuration
-var heatmapInstance = h337.create({
-    // only container is required, the rest will be defaults
-    container: document.querySelector('.heatmap')
-});
+var heatmapInstance = h337.create(heatmapConfig);
 
 // now generate some random data
 var points = [];
