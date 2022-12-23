@@ -109,11 +109,11 @@ def digest(game):
                 taken_piece=piece_dict[board.piece_at(move.from_square).symbol().lower()]
         print(taking)
         board.push(move)
-        to=move.uci()[2:3]
+        to=move.uci()[2:4]
         piece=piece_dict[board.piece_at(move.to_square).symbol().lower()]
         color="white" if white else "black"
         checked=board.is_check()
-        king_pos=board.king(not white)
+        king_pos=chess.SQUARE_NAMES[board.king(not white)]
         white=not white
         move={"piece":piece,"to":to,"color":color,"checked":checked,"enemy_k":king_pos,"taking":taking,"took":taken_piece}
         moves.append(move)
