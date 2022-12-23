@@ -50,6 +50,7 @@ def stockfishGame(game):
     #for unqiue file name
 
 def addPlayer(player_name,elo,players_dict):
+    player={}
     players_dict[player_name]={}
     players_dict[player_name]["id"]=len(players_dict.keys())
     players_dict[player_name]["name"]=' '.join([i.strip() for i in player_name.split(',')][::-1])
@@ -64,6 +65,7 @@ def addLink(game_name,game,player_dict,links_dict):
     links_dict[game_name]["black"]=player_dict[black]["id"]
     links_dict[game_name]["round"]=game.headers['Round']
     links_dict[game_name]["id"]=len(links_dict.keys())
+    links_dict[game_name]["game_name"]=game_name
 
     result=game.headers['Result']
     if result=="1-0":
