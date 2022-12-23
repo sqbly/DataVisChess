@@ -142,7 +142,7 @@ class PlayerOverview{
     }
 }
 if(!dummyData){
-fetch('./tournament.json')
+fetch('./assets/jsons/tournament.json')
     .then(response => response.json())
     .then(data => {console.log(data);
         new PlayerOverview(data)});
