@@ -15,11 +15,14 @@
        
         <!-- <div id="board1" style="width: 400px"></div> -->
 
-        <div class="heatmap_board">
+        <button onclick="showerToggler()">Toggle mode</button>
+
+
+        <div id="heatmap_board" style="display: block">
             <div class="heatmap" id="board_heatmap" style="width: 400px"></div> 
         </div>
 
-        <div class="situation_board">
+        <div id="situation_board" style="display: none">
             <div id="board_positions" style="width: 400px"></div>
         </div>
 
@@ -30,7 +33,7 @@
     <script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script>
     <script src="https://d3js.org/d3.v4.js"></script>
     <script src="/node_modules/jquery/dist/jquery.js"></script>
-    <!-- <script src='/assets/js/script.js'></script> -->
+    <script src='/assets/js/script.js'></script>
     <script src='/node_modules/@chrisoakman/chessboardjs/dist/chessboard-1.0.0.js'> </script>
     <!-- <script src='/node_modules/@chrisoakman/chessboardjs/dist/chessboard-1.0.0.min.js'> </script> -->
 
