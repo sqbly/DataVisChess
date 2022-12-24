@@ -144,10 +144,10 @@ class PlayerOverview{
 if(!dummyData){
 fetch('./assets/jsons/tournament.json')
     .then(response => response.json())
-    .then(data => {console.log(data);
+    .then(data => {
         new PlayerOverview(data)});
     }
 else{
-    data={players,links}
-    new PlayerOverview(dummyData);
+    data={"players":players,"links":links}
+    new PlayerOverview(data);
 }
