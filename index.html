@@ -20,27 +20,27 @@
 
         <div id="heatmap_board" style="display: block">
             <div class="heatmap" id="board_heatmap" style="width: 600px"></div> 
+            <button class="dropbtn" onclick="showOpenings()">Openings</button>
+            <button class="dropbtn" onclick="showChecks()">Checks</button>
+            <button class="dropbtn" onclick="showMates()">Mates</button>
+            
+            <div class="dropdown">
+                <button class="dropbtn">Piece</button>
+                <div class="dropdown-content">
+                    <a onclick="showPiece('pawn')">Pawn</a>
+                    <a onclick="showPiece('knight')">Knight</a>
+                    <a onclick="showPiece('bishop')">Bishop</a>
+                    <a onclick="showPiece('rook')">Rook</a>
+                    <a onclick="showPiece('queen')">Queen</a>
+                    <a onclick="showPiece('king')">King</a>
+                </div>
+            </div>
         </div>
 
         <div id="situation_board" style="display: none">
             <div id="board_positions" style="width: 600px"></div>
         </div>
 
-        <button class="dropbtn" onclick="showOpenings()">Openings</button>
-        <button class="dropbtn" onclick="showChecks()">Checks</button>
-        <button class="dropbtn" onclick="showMates()">Mates</button>
-
-        <div class="dropdown">
-            <button class="dropbtn">Piece</button>
-            <div class="dropdown-content">
-                <a onclick="showPiece('pawn')">Pawn</a>
-                <a onclick="showPiece('knight')">Knight</a>
-                <a onclick="showPiece('bishop')">Bishop</a>
-                <a onclick="showPiece('rook')">Rook</a>
-                <a onclick="showPiece('queen')">Queen</a>
-                <a onclick="showPiece('king')">King</a>
-            </div>
-        </div>
         
         <div class="eval_plot"></div>
 
