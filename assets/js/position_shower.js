@@ -1,9 +1,3 @@
-
-
-
-
-
-
 class PositionShower{
     constructor() {
         var config = {

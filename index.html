@@ -15,7 +15,7 @@
        
         <!-- <div id="board1" style="width: 400px"></div> -->
 
-        <button onclick="showerToggler()">Toggle mode</button>
+        <button class="dropbtn" onclick="showerToggler()">Toggle mode</button>
 
 
         <div id="heatmap_board" style="display: block">
@@ -24,6 +24,22 @@
 
         <div id="situation_board" style="display: none">
             <div id="board_positions" style="width: 400px"></div>
+        </div>
+
+        <button class="dropbtn" onclick="showOpenings()">Openings</button>
+        <button class="dropbtn" onclick="showChecks()">Checks</button>
+        <button class="dropbtn" onclick="showMates()">Mates</button>
+
+        <div class="dropdown">
+            <button class="dropbtn">Piece</button>
+            <div class="dropdown-content">
+                <a onclick="showPiece('pawn')">Pawn</a>
+                <a onclick="showPiece('knight')">Knight</a>
+                <a onclick="showPiece('bishop')">Bishop</a>
+                <a onclick="showPiece('rook')">Rook</a>
+                <a onclick="showPiece('queen')">Queen</a>
+                <a onclick="showPiece('king')">King</a>
+            </div>
         </div>
 
         
@@ -39,7 +55,7 @@
     <script src='/node_modules/heatmap.js/build/heatmap.min.js'></script>
     <script src="/node_modules/requirejs/require.js"></script>
     <script src='/assets/js/position_shower.js'></script>
-    <script src='/assets/js/heatmap.js'></script>
+    <script src='/assets/js/heatmap_json.js'></script>
 
 </html>
 
