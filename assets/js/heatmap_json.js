@@ -1,5 +1,5 @@
-var width = 400;
-var height = 400;
+var width = 600;
+var height = 600;
 
 var currentGame = 'Alekseenko_Kirill_Caruana_Fabiano_09';
 
@@ -24,7 +24,7 @@ class HeatmapShower {
 
         var heatmapConfigBlack = {
             container: document.querySelector('.heatmap'),
-            radius: 20,
+            radius: height/20,
             maxOpacity: 1,
             minOpacity: 0.5,
             blur: 0,
