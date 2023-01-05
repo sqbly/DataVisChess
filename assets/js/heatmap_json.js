@@ -16,6 +16,14 @@ function posTranslator(pos) {
     return point;
 }
 
+function otherColor(color) {
+    if (color == "black") {
+        return "white";
+    } else {
+        return "black";
+    }
+}
+
 class HeatmapShower {
     constructor() {
         var config = {
@@ -84,8 +92,8 @@ class HeatmapShower {
 
                     var last_move = moves[moves.length - 1];
                     if (last_move['checked']) {
-                        this.piece_positions[game][last_move['color']]['mate'].push(posTranslator(last_move['enemy_k']));
-                        this.total_piece_pos[last_move['color']]['mate'].push(posTranslator(last_move['enemy_k']));
+                        this.piece_positions[game][otherColor(last_move['color'])]['mate'].push(posTranslator(last_move['enemy_k']));
+                        this.total_piece_pos[otherColor(last_move['color'])]['mate'].push(posTranslator(last_move['enemy_k']));
                     }
 
                     for (let i = 0; i < moves.length; i++) {
@@ -93,8 +101,8 @@ class HeatmapShower {
                         var color = moves[i]['color'];
 
                         if (moves[i]['checked']) {
-                            this.piece_positions[game][color]['check'].push(posTranslator(moves[i]['enemy_k']));
-                            this.total_piece_pos[color]['check'].push(posTranslator(moves[i]['enemy_k']));
+                            this.piece_positions[game][otherColor(color)]['check'].push(posTranslator(moves[i]['enemy_k']));
+                            this.total_piece_pos[otherColor(color)]['check'].push(posTranslator(moves[i]['enemy_k']));
                         }
 
                         if (this.piece_positions[game][color][piece] == null) {
