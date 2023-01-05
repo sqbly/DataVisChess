@@ -116,7 +116,7 @@ class PlayerOverview {
             nodes.style("fill", "#b8b8b8")
             d3.select(this).style("fill", "black")
             d3.select(this).style("border", "2px solid gold")
-            links.style('stroke', function (link_d) { return link_d.winner === d.id ? '#fcd30a' : '#8a8a8a'; })
+            links.style('stroke', function (link_d) { return link_d.winner === d.id ? '#fcd30a' :  link_d.winner >0 ? "#e81848" : '#8a8a8a' ; })
                 .style('stroke-width', function (link_d) { return link_d.white === d.id || link_d.black === d.id ? 4 : 2; })
                 .style('opacity', function (link_d) { return link_d.white === d.id || link_d.black === d.id ? 1 : 0.1; })
         })
