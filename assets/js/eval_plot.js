@@ -65,13 +65,16 @@ class EvalPlot{
         .range([0, this.width]);
 
     //x axis ticks
+     
     this.svg.append("g")
         .attr("transform", "translate(0," + (this.height) + ")")
-        .call(d3.axisBottom(x).ticks(5).tickSizeOuter(0));
+        .call(d3.axisBottom(x).ticks(5).tickSizeOuter(0).tickFormat(function(d) { return d/2 +1; }));
 
+    
     //change here for 2 link: https://www.d3indepth.com/scales/#scales-with-continuous-input-and-continuous-output
+    var maxValue=Math.max(Math.max(...preparedData.values),Math.abs(Math.min(...preparedData.values)))
     var y = d3.scaleSqrt()
-        .domain([Math.min(...preparedData.values), 0,Math.max(...preparedData.values)])
+        .domain([-maxValue, 0,maxValue])
         .range([this.height,this.height/2, 0])
         .nice();
     
@@ -130,10 +133,11 @@ class EvalPlot{
         .data(preparedData.values)
         .enter()
         .append("circle")
-        .attr("fill", "grey")
+        .attr("fill", function(d,i) { return i%2===0 ? "#Ebf3f9" : "grey" })
         .attr("cx", function(d, i) { return x(i) })
         .attr("cy", function(d) { return y(d) })
-        .attr("r", 4).attr("fill-opacity", 1)
+        .attr("r", 4)
+        .attr("fill-opacity", 0.9)
 
     //tooltip
     nodes.append("svg:title")
@@ -153,8 +157,18 @@ class EvalPlot{
             .text(function(d,i) { return preparedData.tooltip[i] });
     })
 
-    //mark current node
-    
+    //TODO: update chessboard to selected move, please do it in this function if possible
+    //movenbumber starts at 0
+    var setBoard=function(data,movenumber){
+        var black=movenumber%2===0
+        let actualmove=Math.floor(movenumber/2)+1
+        console.log(data,black,actualmove,movenumber)
+    }
+
+    //update chessboard to selected move
+    nodes.on("click", function(d,i){
+        setBoard(data,i)
+    })
     }
 }
 
