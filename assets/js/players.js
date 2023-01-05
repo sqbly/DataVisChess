@@ -88,7 +88,7 @@ class PlayerOverview{
         .text(function(d){return d.name})
         .attr("text-anchor", "middle")
 
-        //onclick functionality of links
+        //onclick functionality of links TODO: 
         var selectGame=function(d){
             console.log(d);
         }
