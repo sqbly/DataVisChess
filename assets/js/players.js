@@ -81,6 +81,14 @@ class PlayerOverview {
             .attr("y", function (d) { return heightDict[d.id] - 10 })
             .text(function (d) { return d.name })
             .attr("text-anchor", "middle")
+        
+        svg.append("text")
+            .attr("x", (this.width / 2) + 190)
+            .attr("y", 40)
+            .attr("text-anchor", "middle")
+            .style("font-size", "16px")
+            .style("text-decoration", "underline")
+            .text("👑");
 
         //onclick functionality of links TODO: 
         var selectGame = function (d) {
