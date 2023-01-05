@@ -8,6 +8,7 @@ var currentPiece = 'opening';
 function posTranslator(pos) {
     var x = pos.charCodeAt(0) - 97;
     var y = pos.charCodeAt(1) - 49;
+    y = 8 - y - 1;
     var point = {
         x: x * Math.floor((width - 2) / 8) + Math.floor(width / 16) + 1,
         y: y * Math.floor((height - 2) / 8) + Math.floor(height / 16) + 2,
