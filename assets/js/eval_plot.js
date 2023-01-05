@@ -162,9 +162,22 @@ class EvalPlot{
     //TODO: update chessboard to selected move, please do it in this function if possible
     //movenbumber starts at 0
     var setBoard=function(data,movenumber){
-        var black=movenumber%2===0
+        var black=movenumber%2===1
         let actualmove=Math.floor(movenumber/2)+1
-        console.log(data,black,actualmove,movenumber)
+        console.log(data)
+        var y = document.getElementById("situation_board");
+        if (y.style.display === "none") {
+            showerToggler();
+        }
+        var move_code = actualmove.toString();
+        if (black) {
+            move_code = move_code + 'b';
+        } else {
+            move_code = move_code + 'w';
+        }
+        console.log(move_code);
+
+        posShow.setPos(currentGame, move_code)
     }
 
     //update chessboard to selected move

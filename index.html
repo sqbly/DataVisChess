@@ -15,10 +15,14 @@
        
         <!-- <div id="board1" style="width: 400px"></div> -->
 
-        <button class="dropbtn" onclick="showerToggler()">Toggle mode</button>
+        <p class="game_title" id="game_title">All games</p>
 
 
-        <div id="heatmap_board" style="display: block">
+        <button class="dropbtn" onclick="showerToggler()">Heatmap/Board situation</button>
+        <button class="dropbtn" onclick="resetCurrentGame()">Reset game</button>
+        
+        <div  id="heatmap_board" style="display: block">
+            <p class="board_title" id="heatmap_title">Empty Heatmap</p>
             <div class="heatmap" id="board_heatmap" style="width: 600px"></div> 
             <button class="dropbtn" onclick="showOpenings()">Openings</button>
             <button class="dropbtn" onclick="showChecks()">Checks</button>
@@ -37,8 +41,11 @@
             </div>
         </div>
 
-        <div id="situation_board" style="display: none">
+        <div  id="situation_board" style="display: none">
+            <p class="board_title" id="sit_board_title">Start</p>
             <div id="board_positions" style="width: 600px"></div>
+            <button class="dropbtn" onclick="prevMove()">Prev</button>
+            <button class="dropbtn" onclick="nextMove()">Next</button>
         </div>
 
         

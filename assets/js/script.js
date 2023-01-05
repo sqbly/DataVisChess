@@ -13,3 +13,10 @@ function showerToggler() {
   }
 }
 
+function resetCurrentGame() {
+  currentGame = null;
+  document.getElementById("game_title").innerHTML = "All games"
+  refreshHeatmap();
+  posShow.reset();
+}
+

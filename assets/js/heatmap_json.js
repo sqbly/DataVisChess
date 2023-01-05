@@ -1,7 +1,9 @@
 var width = 600;
 var height = 600;
 
-var currentGame = 'Alekseenko_Kirill_Caruana_Fabiano_09';
+var currentGame = null;
+var currentPiece = 'opening';
+
 
 function posTranslator(pos) {
     var x = pos.charCodeAt(0) - 97;
@@ -45,12 +47,6 @@ class HeatmapShower {
 
         this.heatmapWhite = h337.create(heatmapConfigWhite);
 
-        this.black_starts = [];
-        this.white_starts = [];
-        this.black_checks = [];
-        this.white_checks = [];
-        this.black_mates = [];
-        this.white_mates = [];
         this.piece_positions = new Object();
         this.total_piece_pos = new Object();
     }
@@ -62,27 +58,34 @@ class HeatmapShower {
 
                 this.total_piece_pos['white'] = new Object();
                 this.total_piece_pos['black'] = new Object();
+                this.total_piece_pos['white']['opening'] = [];
+                this.total_piece_pos['black']['opening'] = [];
+                this.total_piece_pos['white']['mate'] = [];
+                this.total_piece_pos['black']['mate'] = [];
+                this.total_piece_pos['white']['check'] = [];
+                this.total_piece_pos['black']['check'] = [];
 
                 for (const [game, moves] of Object.entries(games)) {
                     this.piece_positions[game] = new Object();
                     this.piece_positions[game]['white'] = new Object();
                     this.piece_positions[game]['black'] = new Object();
-                    if (moves[0]['color'] == 'white') {
-                        this.white_starts.push(posTranslator(moves[0]['to']));
-                    } else {
-                        this.black_starts.push(posTranslator(moves[0]['to']));
-                    }
-                    if (moves[1]['color'] == 'white') {
-                        this.white_starts.push(posTranslator(moves[1]['to']));
-                    } else {
-                        this.black_starts.push(posTranslator(moves[1]['to']));
-                    }
-                    if (moves[moves.length - 1]['checked']) {
-                        if (moves[moves.length - 1]['color'] == 'white') {
-                            this.black_mates.push(posTranslator(moves[moves.length - 1]['enemy_k']));
-                        } else {
-                            this.white_mates.push(posTranslator(moves[moves.length - 1]['enemy_k']));
-                        }
+                    this.piece_positions[game]['white']['opening'] = [];
+                    this.piece_positions[game]['black']['opening'] = [];
+                    this.piece_positions[game]['white']['mate'] = [];
+                    this.piece_positions[game]['black']['mate'] = [];
+                    this.piece_positions[game]['white']['check'] = [];
+                    this.piece_positions[game]['black']['check'] = [];
+                    
+                    
+                    this.piece_positions[game][moves[0]['color']]['opening'].push(posTranslator(moves[0]['to']));
+                    this.total_piece_pos[moves[0]['color']]['opening'].push(posTranslator(moves[0]['to']));
+                    this.piece_positions[game][moves[1]['color']]['opening'].push(posTranslator(moves[1]['to']));
+                    this.total_piece_pos[moves[1]['color']]['opening'].push(posTranslator(moves[1]['to']));
+
+                    var last_move = moves[moves.length - 1];
+                    if (last_move['checked']) {
+                        this.piece_positions[game][last_move['color']]['mate'].push(posTranslator(last_move['enemy_k']));
+                        this.total_piece_pos[last_move['color']]['mate'].push(posTranslator(last_move['enemy_k']));
                     }
 
                     for (let i = 0; i < moves.length; i++) {
@@ -90,11 +93,8 @@ class HeatmapShower {
                         var color = moves[i]['color'];
 
                         if (moves[i]['checked']) {
-                            if (color == 'white') {
-                                this.black_checks.push(posTranslator(moves[i]['enemy_k']));
-                            } else {
-                                this.white_checks.push(posTranslator(moves[i]['enemy_k']));
-                            }
+                            this.piece_positions[game][color]['check'].push(posTranslator(moves[i]['enemy_k']));
+                            this.total_piece_pos[color]['check'].push(posTranslator(moves[i]['enemy_k']));
                         }
 
                         if (this.piece_positions[game][color][piece] == null) {
@@ -147,27 +147,38 @@ heatShow = new HeatmapShower();
 heatShow.fetchData();
 
 function showOpenings() {
-    heatShow.plotHeatmap(heatShow.black_starts, heatShow.heatmapBlack);
-    heatShow.plotHeatmap(heatShow.white_starts, heatShow.heatmapWhite);
+    showPiece('opening');
 }
 function showChecks() {
-    heatShow.plotHeatmap(heatShow.black_checks, heatShow.heatmapBlack);
-    heatShow.plotHeatmap(heatShow.white_checks, heatShow.heatmapWhite);
+    showPiece('check');
 }
 function showMates() {
-    heatShow.plotHeatmap(heatShow.black_mates, heatShow.heatmapBlack);
-    heatShow.plotHeatmap(heatShow.white_mates, heatShow.heatmapWhite);
+    showPiece('mate');
 }
 function showPiece(piece) {
+    currentPiece = piece;
+    refreshHeatmap();
+}
+
+
+function capitalizeFirst(word) {
+    var first_letter = word.charCodeAt(0);
+    var new_letter = String.fromCharCode(first_letter - 32);
+    return new_letter + word.substring(1, word.length);
+}
+
+function refreshHeatmap() {
+    document.getElementById("heatmap_title").innerHTML = capitalizeFirst(currentPiece) + " Heatmap";
+    
     if (currentGame == null) {
-        heatShow.plotHeatmap(heatShow.total_piece_pos['black'][piece], heatShow.heatmapBlack);
-        heatShow.plotHeatmap(heatShow.total_piece_pos['white'][piece], heatShow.heatmapWhite);
+        heatShow.plotHeatmap(heatShow.total_piece_pos['black'][currentPiece], heatShow.heatmapBlack);
+        heatShow.plotHeatmap(heatShow.total_piece_pos['white'][currentPiece], heatShow.heatmapWhite);
     } else {
-        heatShow.plotHeatmap(heatShow.piece_positions[currentGame]['black'][piece], heatShow.heatmapBlack);
-        heatShow.plotHeatmap(heatShow.piece_positions[currentGame]['white'][piece], heatShow.heatmapWhite);
+        heatShow.plotHeatmap(heatShow.piece_positions[currentGame]['black'][currentPiece], heatShow.heatmapBlack);
+        heatShow.plotHeatmap(heatShow.piece_positions[currentGame]['white'][currentPiece], heatShow.heatmapWhite);
     }
 }
 
 // heatShow.plotHeatmap();
 
-// showerToggler()
+showerToggler()

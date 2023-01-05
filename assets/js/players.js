@@ -31,6 +31,29 @@ if (dummyData) {
     addLink(2, 4, 2);
     addLink(0, 3, 3);
 }
+
+function remove_underscore_from_name(name) {
+    for (let i = 0; i < name.length; i++) {
+        if (name[i] == '_') {
+            return name.substring(i + 1, name.length) + " " + name.substring(0, i)
+        }
+    }
+    return name;
+}
+
+function make_nice_game_title(game_name) {
+    var count = 0;
+    for (let i = 0; i < game_name.length; i++) {
+        if (game_name[i] == '_') {
+            count = count + 1;
+            if (count == 2) {
+                return remove_underscore_from_name(game_name.substring(0, i)) + " vs " + remove_underscore_from_name(game_name.substring(i+1, game_name.length-3))
+            }
+        }
+    }
+    return game_name;
+}
+
 //TODO:
 // 1. add color coordination for white/black (just make nodes corresponding color and border gold for the winner)
 // 2. show elo and country, maybe in a generator with picture (make dict with player names and pictures and info that gets used)
@@ -96,6 +119,11 @@ class PlayerOverview {
             console.log(d.winner)
             console.log(heightDict[d.winner])
             console.log(x(d.winner))
+            currentGame = d.game_name;
+            document.getElementById("game_title").innerHTML = make_nice_game_title(currentGame);
+
+            refreshHeatmap();
+            posShow.reset()
         }
 
         let start, end;

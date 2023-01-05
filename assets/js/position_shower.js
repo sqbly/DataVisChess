@@ -5,23 +5,79 @@ class PositionShower{
         }
 
         this.pos_board = Chessboard('board_positions', config)
+        this.current_round = '0b';
     }
     setPos(game, round) {
         fetch('./assets/jsons/fens.json')
             .then(response => response.json())
             .then(data => {
                 console.log(data);
+                console.log(round);
                 var fens = data;
-                var move3_pos = fens[game][round]
-                console.log(move3_pos);
-                this.pos_board.position(move3_pos)
+                var move = fens[game][round]
+                if (move != null) {
+                    console.log(move);
+                    document.getElementById("sit_board_title").innerHTML = "Move " + round;
+                    this.current_round = round;
+                    this.pos_board.position(move)
+                } else {
+                    if (round == 'start' && game != null) {
+                        document.getElementById("sit_board_title").innerHTML = "Start";
+
+                        this.pos_board.position('start')
+                        this.current_round = 'start';
+                    }
+                }
             });
+    }
+    reset() {
+        document.getElementById("sit_board_title").innerHTML = "Start";
+        this.pos_board.position('start')
+        this.current_round = 'start';
     }
 }
 
 posShow = new PositionShower(); 
 
-posShow.setPos('Alekseenko_Kirill_Caruana_Fabiano_09', '5b')
+function prevMove() {
+
+    var color = posShow.current_round[posShow.current_round.length - 1];
+    var number = posShow.current_round.substring(0, posShow.current_round.length - 1);
+
+    if (color == 'b') {
+        var new_round = number + 'w';
+        posShow.setPos(currentGame, new_round)
+    } else {
+        var round_no = parseInt(number);
+        if (round_no != 1) {
+            round_no = round_no - 1;
+            var new_round = round_no.toString() + 'b';
+            posShow.setPos(currentGame, new_round)
+        } else {
+            posShow.setPos(currentGame, "start")
+        }
+    }
+}
+function nextMove() {
+    if (posShow.current_round == "start") {
+        posShow.setPos(currentGame, "1w")
+    }
+
+    var color = posShow.current_round[posShow.current_round.length - 1];
+    var number = posShow.current_round.substring(0, posShow.current_round.length - 1);
+
+    if (color == 'w') {
+        var new_round = number + 'b';
+        posShow.setPos(currentGame, new_round)
+    } else {
+        var round_no = parseInt(number);
+        
+        round_no = round_no + 1;
+        var new_round = round_no.toString() + 'w';
+        posShow.setPos(currentGame, new_round)
+        
+    }
+}
 
 
 
