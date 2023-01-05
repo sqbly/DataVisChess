@@ -151,9 +151,11 @@ class EvalPlot{
             .text(function(d,i) { return preparedData.tooltip[i] });
     })
     nodes.on("mouseout", function(d,i){
-        d3.select(this).attr("fill", "grey")
+        d3.select(this).attr("fill",function(d) { return i%2===0 ? "#Ebf3f9" : "grey" })
         d3.select(this).attr("r", 4).attr("fill-opacity", 1)
         d3.select(this).append("svg:title")
+        .attr("fill", )
+
             .text(function(d,i) { return preparedData.tooltip[i] });
     })
 
