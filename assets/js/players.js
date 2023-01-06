@@ -115,15 +115,12 @@ class PlayerOverview {
 
         //onclick functionality of links TODO: 
         var selectGame = function (d) {
-            console.log(d);
-            console.log(d.winner)
-            console.log(heightDict[d.winner])
-            console.log(x(d.winner))
+
             currentGame = d.game_name;
             document.getElementById("game_title").innerHTML = make_nice_game_title(currentGame);
-
             refreshHeatmap();
             posShow.reset()
+            loadEval(currentGame);
         }
 
         let start, end;
@@ -156,15 +153,14 @@ class PlayerOverview {
                 .style('stroke-width', function (link_d) { return link_d.white === d.id || link_d.black === d.id ? 4 : 2; })
                 .style('opacity', function (link_d) { return link_d.white === d.id || link_d.black === d.id ? 1 : 0.1; })
         })
-            .on('mouseout', function (d) {
+        
+        nodes.on('mouseout', function (d) {
                 nodes.style('fill', "grey")
-                links
-                    .style('stroke', 'black')
+                links.style('stroke', 'black')
                     .style('stroke-width', '2')
                     .style('opacity', function (link_d) { return link_d.winner < 0 ? 0.1 : 1; })
             })
 
-        let tempText;
         links.on("mouseover", function (d) {
             links.style('stroke', 'black')
                 .style('stroke-width', '2')
@@ -189,10 +185,7 @@ class PlayerOverview {
                     .style('opacity', function (link_d) { return link_d.winner < 0 ? 0.1 : 1; })
                 nodes.style("fill", "#b8b8b8")
 
-                if (d.winner > 0) {
-                    tempText.remove()
-                    tempText = null;
-                }
+
             })
             .on("click", function (d) {
                 selectGame(d);

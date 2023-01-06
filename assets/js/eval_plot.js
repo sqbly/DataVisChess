@@ -1,6 +1,6 @@
 class EvalPlot{
     constructor(data){
-        
+        this.first=true;
         this.data=data;
         this.margin = {top: 40, right: 90, bottom: 90, left: 90};
         this.width = 900 - this.margin.left - this.margin.right;
@@ -15,13 +15,19 @@ class EvalPlot{
             .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
 
         //this.drawChart(data["Vachier-Lagrave_Maxime_Caruana_Fabiano_01"]);
-        this.drawChart(data["Giri_Anish_Alekseenko_Kirill_14"]);
     }
 
     changeTo(gamename){
         if (gamename in this.data){
-            this.svg.selectAll("*").remove();
+            if (!this.first){
+                this.svg.selectAll("*").remove();
+            }
+            this.first=false;
             this.drawChart(this.data[gamename]);
+        } else {
+            if (!this.first){
+                this.svg.selectAll("*").remove();
+            }
         }
     }
 
@@ -156,7 +162,6 @@ class EvalPlot{
         d3.select(this).append("svg:title")
         .attr("fill", )
 
-            .text(function(d,i) { return preparedData.tooltip[i] });
     })
 
     //TODO: update chessboard to selected move, please do it in this function if possible
@@ -164,7 +169,6 @@ class EvalPlot{
     var setBoard=function(data,movenumber){
         var black=movenumber%2===1
         let actualmove=Math.floor(movenumber/2)+1
-        console.log(data)
         var y = document.getElementById("situation_board");
         if (y.style.display === "none") {
             showerToggler();
@@ -175,7 +179,6 @@ class EvalPlot{
         } else {
             move_code = move_code + 'w';
         }
-        console.log(move_code);
 
         posShow.setPos(currentGame, move_code)
     }
@@ -187,8 +190,15 @@ class EvalPlot{
     }
 }
 
+var evalPlot;
+
+function loadEval(game){
+    evalPlot.changeTo(game)
+}
+
+
 fetch('./assets/jsons/evals.json')
     .then(response => response.json())
     .then(data => {
-        new EvalPlot(data)});
+        evalPlot=new EvalPlot(data)});
     
