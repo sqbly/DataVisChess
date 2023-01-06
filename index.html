@@ -15,18 +15,26 @@
     <div id="top">
         <div id="main_title">Chess Candidates 2020</div>
     </div>
+
+    <p id="players_title">Matchups</p>
+
     <div id="players">
-        <p id="players_title">Players and Games</p>
+        <div class="desc">Games can be selected by clicking on the links between players.</div>
+        
         <div id="playerOverview"></div>
 
 
         <!-- <div id="board1" style="width: 400px"></div> -->
 
-        <p class="game_title" id="game_title">All games</p>
     </div>
+    <p class="game_title" id="game_title">All games</p>
+
+    <div class="desc">Can toggle between a discrete situation and heatmap visualization.</div>
+
     <div id="board">
         <div id="heatmap_board" style="display: block">
             <p class="board_title section" id="heatmap_title">Empty Heatmap</p>
+
             <div class="heatmap" id="board_heatmap" style="width: 600px"></div>
             <button class="dropbtn" onclick="showOpenings()">Openings</button>
             <button class="dropbtn" onclick="showChecks()">Checks</button>
@@ -60,7 +68,7 @@
     <p class="eval_title" id="eval_title">Evaluation</p>
 
     <div id="eval">
-        <div id="eval_desc">The bigger the area of a color, the bigger its advantage. The middle line shows equilibrium.</div>
+        <div class="desc">The bigger the area of a color, the bigger its advantage. The middle line shows equilibrium.</div>
         <div class="eval_plot">
         </div>
     </div>

@@ -21,7 +21,6 @@ body {
 
 #eval {
     text-align: left;
-    margin-left:40px;
 }
 
 #switches{
@@ -40,7 +39,7 @@ p{
     margin-block-end: 0;
 }
 
-#eval_desc{
+.desc{
     font-family: 'Playfair Display';
     font-size: 18px;
     font-style: italic;
@@ -80,6 +79,10 @@ p{
     font-family: 'Playfair Display';
     font-size: 2em;
     margin-left: max(5%, 25px);
+}
+
+.eval_plot{
+    margin-left:150px;
 }
 
 .board_title {

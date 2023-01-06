@@ -2,9 +2,10 @@ class EvalPlot{
     constructor(data){
         this.first=true;
         this.data=data;
-        this.margin = {top: 40, right: 90, bottom: 90, left: 90};
-        this.width = 900 - this.margin.left - this.margin.right;
-        this.height = 600 - this.margin.top - this.margin.bottom;
+        this.margin = {top: 20, right: 20, bottom: 20, left: 20};
+        this.og_width = 700;
+        this.width = this.og_width - this.margin.left - this.margin.right;
+        this.height = 450 - this.margin.top - this.margin.bottom;
         this.ceil=this.height-30;
 
         this.svg=d3.select(".eval_plot")
