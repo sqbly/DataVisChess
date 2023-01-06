@@ -12,6 +12,7 @@ body {
 
 #top {
     text-align: left;
+    margin-top:30px
 }
 
 #players {
@@ -21,6 +22,10 @@ body {
 #eval {
     text-align: left;
     margin-left:40px;
+}
+
+#switches{
+    margin-top: 10px;
 }
 
 #playerOverview {
@@ -53,7 +58,8 @@ p{
 #main_title {
     font-family: 'Playfair Display';
     font-size: 3em;
-    text-align: center;
+    text-align: left;
+    margin-left: max(15%, 55px);
     margin-top: 15px;
     margin-bottom: 15px;
 }
