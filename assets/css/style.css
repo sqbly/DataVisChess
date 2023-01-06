@@ -8,7 +8,6 @@ body {
     margin-left: max(5%, 25px);
     height: 100%;
     background: #b8d9d9;
-    text-align: center;
 }
 
 #top {
@@ -21,6 +20,7 @@ body {
 
 #eval {
     text-align: left;
+    margin-left:40px;
 }
 
 #playerOverview {
@@ -87,7 +87,7 @@ p{
     width: 600;
     height: 100%;
     position: relative;
-    margin: 0 auto;
+    margin-left: 200px;
     display: inline-block;
     background: #b8d9d9;
     text-align: left;
