@@ -13,21 +13,16 @@ class EvalPlot{
             .attr("height", this.height + this.margin.top + this.margin.bottom)
             .append("g")
             .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
-
+        this.changeTo("asd")
         //this.drawChart(data["Vachier-Lagrave_Maxime_Caruana_Fabiano_01"]);
     }
 
     changeTo(gamename){
         if (gamename in this.data){
-            if (!this.first){
-                this.svg.selectAll("*").remove();
-            }
-            this.first=false;
+            this.svg.selectAll("*").remove();
             this.drawChart(this.data[gamename]);
         } else {
-            if (!this.first){
-                this.svg.selectAll("*").remove();
-            }
+            this.svg.selectAll("*").remove();
         }
     }
 

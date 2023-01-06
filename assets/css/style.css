@@ -1,8 +1,98 @@
-
-
-body{
+body {
     background: #b8d9d9;
 }
+
+#main {
+    font-family: 'Roboto';
+    width: 90%;
+    margin-left: max(5%, 25px);
+    height: 100%;
+    background: #b8d9d9;
+    text-align: center;
+}
+
+#top {
+    text-align: left;
+}
+
+#players {
+    text-align: left;
+}
+
+#eval {
+    text-align: left;
+}
+
+#playerOverview {
+    font-family: 'Playfair Display';
+    font-size: 16px;
+}
+
+p{
+    font-family: 'Playfair Display';
+    font-size: 16px;
+    margin-block-start: 1em;
+    margin-block-end: 0;
+}
+
+#eval_desc{
+    font-family: 'Playfair Display';
+    font-size: 18px;
+    font-style: italic;
+    margin-left:max(8%, 30px);;
+}
+
+#eval_mt{
+    font-family: 'Playfair Display';
+    font-size: 16px;
+    font-style: italic;
+    margin-top: max(10%, 50px);
+    margin-left:max(30%, 120px);
+}
+
+#main_title {
+    font-family: 'Playfair Display';
+    font-size: 3em;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#players_title {
+    font-family: 'Playfair Display';
+    font-size: 2em;
+    margin-left: max(5%, 25px);
+}
+
+#game_title {
+    font-family: 'Playfair Display';
+    font-size: 2em;
+    margin-left: max(5%, 25px);
+}
+
+#eval_title {
+    font-family: 'Playfair Display';
+    font-size: 2em;
+    margin-left: max(5%, 25px);
+}
+
+.board_title {
+    font-family: 'Playfair Display';
+    font-size: 1.5em;
+    margin-left: max(5%, 25px);
+    margin-bottom:10px;
+}
+
+#board {
+    width: 600;
+    height: 100%;
+    position: relative;
+    margin: 0 auto;
+    display: inline-block;
+    background: #b8d9d9;
+    text-align: left;
+}
+
 
 .heatmap {
     width: 100%;

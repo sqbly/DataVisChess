@@ -71,9 +71,9 @@ class PlayerOverview {
             this.players = Object.values(data.players);
             this.links = Object.values(data.games);
         }
-        this.margin = { top: 40, right: 90, bottom: 90, left: 90 };
+        this.margin = { top: 20, right: 90, bottom: 0, left: 110 };
         this.width = 1080 - this.margin.left - this.margin.right;
-        this.height = 800 - this.margin.top - this.margin.bottom;
+        this.height = 650 - this.margin.top - this.margin.bottom;
         this.ceil = this.height - 30;
         this.drawChart(true);
     }

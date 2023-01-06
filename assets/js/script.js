@@ -18,5 +18,6 @@ function resetCurrentGame() {
   document.getElementById("game_title").innerHTML = "All games"
   refreshHeatmap();
   posShow.reset();
+  loadEval("null")
 }
 
