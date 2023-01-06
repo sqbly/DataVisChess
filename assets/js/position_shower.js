@@ -1,3 +1,11 @@
+function make_round_pretty(round) {
+    if (round[round.length - 1] == 'b') {
+        return round.substring(0, round.length - 1) + " black"
+    } else {
+        return round.substring(0, round.length - 1) + " white"
+    }
+}
+
 class PositionShower{
     constructor() {
         var config = {
@@ -17,7 +25,7 @@ class PositionShower{
                 var move = fens[game][round]
                 if (move != null) {
                     console.log(move);
-                    document.getElementById("sit_board_title").innerHTML = "Move " + round;
+                    document.getElementById("sit_board_title").innerHTML = "Move " + make_round_pretty(round);
                     this.current_round = round;
                     this.pos_board.position(move)
                 } else {
